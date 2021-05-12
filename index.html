@@ -140,168 +140,175 @@
 
     Promise.all([d3.json("data/migration2020.json")])
         .then(([ch_data]) => {
-            console.log(ch_data);
-            let ch_colorScale = d3.scaleOrdinal().range(d3.schemeTableau10)
+            window.allData = ch_data;
+            rerender(ch_chordChart1);
+            rerender(ch_chordChart2);})
 
-            let ch_nodes = ch_data.nodes;
-            console.log(ch_nodes);
-            let ch_names = ch_nodes.map(d => d.country)
-            console.log(ch_names);
-            let ch_edges = ch_data.edges;
+    function rerender(ch_chordChart) {
+        console.log(window.allData);
+        let ch_colorScale = d3.scaleOrdinal().range(d3.schemeTableau10)
 
-            let ch_matrix = [];
-            let ch_connections = {};
+        let ch_nodes = window.allData.nodes;
+        console.log(ch_nodes);
+        let ch_names = ch_nodes.map(d => d.country)
+        console.log(ch_names);
+        let ch_edges = window.allData.edges;
 
-            for (let i = 0; i < ch_nodes.length; i++) {
-                let ch_row = [];
-                for (let j = 0; j < ch_nodes.length; j++) {
-                    ch_row.push(0);
-                }
-                ch_matrix.push(ch_row);
-                ch_connections[i] = [i]; // everything connected to itself!
+        let ch_matrix = [];
+        let ch_connections = {};
+
+        for (let i = 0; i < ch_nodes.length; i++) {
+            let ch_row = [];
+            for (let j = 0; j < ch_nodes.length; j++) {
+                ch_row.push(0);
             }
-            console.log(ch_matrix);
+            ch_matrix.push(ch_row);
+            ch_connections[i] = [i]; // everything connected to itself!
+        }
+        console.log(ch_matrix);
 
-            ch_edges.forEach(d => {
-                //console.log(d);
-                let ch_SourceIndex = ch_names.indexOf(d.source)
-                let ch_TargetIndex = ch_names.indexOf(d.target)
-                //console.log(ch_SourceIndex)
-               // console.log(ch_TargetIndex)
-                if (d["weight"] > 0) {
-                    ch_matrix[ch_SourceIndex][ch_TargetIndex] = d["weight"];
-                    ch_matrix[ch_TargetIndex][ch_SourceIndex] = d["weight"];
+        ch_edges.forEach(d => {
+            //console.log(d);
+            let ch_SourceIndex = ch_names.indexOf(d.source)
+            let ch_TargetIndex = ch_names.indexOf(d.target)
+            //console.log(ch_SourceIndex)
+            // console.log(ch_TargetIndex)
+            if (d["weight"] > 0) {
+                ch_matrix[ch_SourceIndex][ch_TargetIndex] = d["weight"];
+                ch_matrix[ch_TargetIndex][ch_SourceIndex] = d["weight"];
 
-                    ch_connections[ch_SourceIndex].push(ch_TargetIndex);
-                    ch_connections[ch_TargetIndex].push(ch_SourceIndex);
-                }
-            });
-
-            console.log(ch_matrix);
-            console.log(ch_connections);
-
-            let ch_arc = d3.arc()
-                .innerRadius(ch_innerRadius)
-                .outerRadius(ch_outerRadius);
-
-            let ch_layout = d3.chord()
-                .padAngle(.04)
-                .sortSubgroups(d3.descending)
-                .sortChords(d3.ascending);
-
-            let ch_ribbon = d3.ribbon()
-                .radius(ch_innerRadius);
-
-            let ch_chords = ch_layout(ch_matrix);
-            //console.log(ch_chords);
-
-            //Draw the diagram
-            ch_chordChart1.attr("transform", `translate(${ch_width / 2.0},${ch_height / 2.0})`);
-
-            let ch_ringContainer = ch_chordChart1.append("g");
-            let ch_rings = ch_ringContainer.selectAll("g.segment")
-                .data(ch_chords.groups)
-                .join("g")
-                .attr("class", "segment");
-
-            ch_rings.append("path")
-                .attr("fill", d => ch_colorScale(ch_nodes[d.index].country))
-                .attr("stroke", d => ch_colorScale(ch_nodes[d.index].country))
-                .attr("d", ch_arc);
-
-            let ch_ribbonContainer = ch_chordChart1.append("g");
-            let ch_ribbons = ch_ribbonContainer.selectAll("path.ribbon")
-                .data(ch_chords)
-                .join("path")
-                .attr("class", "ribbon")
-                .attr("fill-opacity", 0.5)
-                .attr("stroke", "none")
-                .attr("fill", d => ch_colorScale(ch_nodes[d.source.index].country))
-                .attr("d", ch_ribbon);
-
-            ch_chords.groups.forEach(d => {
-                let ch_transform = '';
-                let ch_midpoint = (d.startAngle + d.endAngle) / 2;
-                let ch_rotation = (ch_midpoint) * (180 / Math.PI) - 90;
-                ch_transform = ch_transform + ` rotate(${ch_rotation})`;
-                ch_transform = ch_transform + ` translate(${ch_outerRadius}, 0)`;
-                if (ch_rotation > 90) {
-                    ch_transform = ch_transform + ' rotate(180)';
-                    // Notice text anchor issue that also first
-                    d.anchor = "end";
-                }
-                d.trans = ch_transform;
-            });
-
-            ch_rings.append("text")
-                .attr("transform", d => d.trans)
-                .attr("class", "text")
-                .text(d => ch_nodes[d.index].country)
-                .call(ch_wrap,50)
-                .attr("x", -1)
-                .attr("dy", ".5em")
-                .attr("text-anchor", d => d.anchor);
-
-
-            function ch_wrap(text, width) {
-                text.each(function() {
-                    var text = d3.select(this),
-                        words = text.text().split(/\s+/).reverse(),
-                        word,
-                        line = [],
-                        lineNumber = 0,
-                        lineHeight = 1.1, // ems
-
-                        y = text.attr("y"),
-                        dy=0.01,
-                        //dy = parseFloat(text.attr("dy")),
-                        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y-10).attr("dy", dy + "em")
-                    while (word = words.pop()) {
-                        line.push(word)
-                        tspan.text(line.join(" "))
-                        if (tspan.node().getComputedTextLength() > width) {
-                            line.pop()
-                            tspan.text(line.join(" "))
-                            line = [word]
-                            tspan = text.append("tspan").attr("x", 0).attr("y", y-10).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
-                        }
-                    }
-                })
+                ch_connections[ch_SourceIndex].push(ch_TargetIndex);
+                ch_connections[ch_TargetIndex].push(ch_SourceIndex);
             }
-
-            function ch_restoreHighlights() {
-                ch_rings.attr("opacity", 1);   // both text and ring
-                ch_ribbons.attr("opacity", 1);
-                }
-
-            function ch_lowlightAll() {
-                ch_rings.attr("opacity", 0.2); // both text and ring
-                ch_ribbons.attr("opacity", 0.2);
-                }
-
-            function ch_highlightRings(index){
-                let ch_targetSegments = ch_rings.filter(d => {
-                    return ch_connections[d.index].includes(index);
-                });
-                ch_targetSegments.attr("opacity", 1);
-                }
-
-            function ch_highlightRibbons(index) {
-                let ch_targetRibbons = ch_ribbons.filter(d => {
-                        return d.source.index === index || d.target.index === index;
-                    });
-                    ch_targetRibbons.attr("opacity", 1);
-                }
-
-            ch_rings.on("mouseout", function (event, d) {
-                    ch_restoreHighlights();
-                });
-
-            ch_rings.on("mouseover", function (event, d) {
-                    ch_lowlightAll();
-                    ch_highlightRings(d.index);
-                    ch_highlightRibbons(d.index);});
         });
+
+        console.log(ch_matrix);
+        console.log(ch_connections);
+
+        let ch_arc = d3.arc()
+            .innerRadius(ch_innerRadius)
+            .outerRadius(ch_outerRadius);
+
+        let ch_layout = d3.chord()
+            .padAngle(.04)
+            .sortSubgroups(d3.descending)
+            .sortChords(d3.ascending);
+
+        let ch_ribbon = d3.ribbon()
+            .radius(ch_innerRadius);
+
+        let ch_chords = ch_layout(ch_matrix);
+        //console.log(ch_chords);
+
+        //Draw the diagram
+        ch_chordChart.attr("transform", `translate(${ch_width / 2.0},${ch_height / 2.0})`);
+
+        let ch_ringContainer = ch_chordChart.append("g");
+        let ch_rings = ch_ringContainer.selectAll("g.segment")
+            .data(ch_chords.groups)
+            .join("g")
+            .attr("class", "segment");
+
+        ch_rings.append("path")
+            .attr("fill", d => ch_colorScale(ch_nodes[d.index].country))
+            .attr("stroke", d => ch_colorScale(ch_nodes[d.index].country))
+            .attr("d", ch_arc);
+
+        let ch_ribbonContainer = ch_chordChart.append("g");
+        let ch_ribbons = ch_ribbonContainer.selectAll("path.ribbon")
+            .data(ch_chords)
+            .join("path")
+            .attr("class", "ribbon")
+            .attr("fill-opacity", 0.5)
+            .attr("stroke", "none")
+            .attr("fill", d => ch_colorScale(ch_nodes[d.source.index].country))
+            .attr("d", ch_ribbon);
+
+        ch_chords.groups.forEach(d => {
+            let ch_transform = '';
+            let ch_midpoint = (d.startAngle + d.endAngle) / 2;
+            let ch_rotation = (ch_midpoint) * (180 / Math.PI) - 90;
+            ch_transform = ch_transform + ` rotate(${ch_rotation})`;
+            ch_transform = ch_transform + ` translate(${ch_outerRadius}, 0)`;
+            if (ch_rotation > 90) {
+                ch_transform = ch_transform + ' rotate(180)';
+                // Notice text anchor issue that also first
+                d.anchor = "end";
+            }
+            d.trans = ch_transform;
+        });
+
+        ch_rings.append("text")
+            .attr("transform", d => d.trans)
+            .attr("class", "text")
+            .text(d => ch_nodes[d.index].country)
+            .call(ch_wrap, 50)
+            .attr("x", -1)
+            .attr("dy", ".5em")
+            .attr("text-anchor", d => d.anchor);
+
+
+        function ch_wrap(text, width) {
+            text.each(function () {
+                var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1, // ems
+
+                    y = text.attr("y"),
+                    dy = 0.01,
+                    //dy = parseFloat(text.attr("dy")),
+                    tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y - 10).attr("dy", dy + "em")
+                while (word = words.pop()) {
+                    line.push(word)
+                    tspan.text(line.join(" "))
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop()
+                        tspan.text(line.join(" "))
+                        line = [word]
+                        tspan = text.append("tspan").attr("x", 0).attr("y", y - 10).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
+                    }
+                }
+            })
+        }
+
+        function ch_restoreHighlights() {
+            ch_rings.attr("opacity", 1);   // both text and ring
+            ch_ribbons.attr("opacity", 1);
+        }
+
+        function ch_lowlightAll() {
+            ch_rings.attr("opacity", 0.2); // both text and ring
+            ch_ribbons.attr("opacity", 0.2);
+        }
+
+        function ch_highlightRings(index) {
+            let ch_targetSegments = ch_rings.filter(d => {
+                return ch_connections[d.index].includes(index);
+            });
+            ch_targetSegments.attr("opacity", 1);
+        }
+
+        function ch_highlightRibbons(index) {
+            let ch_targetRibbons = ch_ribbons.filter(d => {
+                return d.source.index === index || d.target.index === index;
+            });
+            ch_targetRibbons.attr("opacity", 1);
+        }
+
+        ch_rings.on("mouseout", function (event, d) {
+            ch_restoreHighlights();
+        });
+
+        ch_rings.on("mouseover", function (event, d) {
+            ch_lowlightAll();
+            ch_highlightRings(d.index);
+            ch_highlightRibbons(d.index);
+        });
+    }
+
 
 </script>
 </body>
