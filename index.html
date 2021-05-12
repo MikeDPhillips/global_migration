@@ -42,6 +42,10 @@
             padding: 5px 10px;
             position: relative;
         }
+
+        .container_chord{
+            float:left;
+        }
     </style>
 </head>
 <body>
@@ -86,7 +90,7 @@
     <!--second row-->
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <div class="row">
-        <div class="col-12 col-md-8">
+        <div class="col-6">
             <div class="chart-wrapper">
                 <div class="chart-title">Fancy Chart</div>
             <div class="chart-stage">
@@ -95,14 +99,14 @@
         </div>
         </div>
 
-        <div class="col-6 col-md-4">
+        <div class="col-6">
             <div class="chart-wrapper">
                 <div class="chart-title">
                     In and Out</div>
 
             <div class="chart-stage">
-                <div id="chord-chart">
-                </div>
+                <div class="container_chord" id="chord-chart1"></div>
+                <div class="container_chord" id="chord-chart2"></div>
             </div>
         </div>
         </div>
@@ -118,7 +122,15 @@
 
     let ch_formatPercent = d3.format(".1%");
 
-    let ch_chordChart = d3.select("#chord-chart")
+    let ch_chordChart1 = d3.select("#chord-chart1")
+        .append("svg")
+        .attr("width",ch_width)
+        .attr("height",ch_height)
+        .append("g")
+        .attr("id","circle").attr("transform",
+            "translate("+ch_width/2+","+ch_height/2+")");
+
+    let ch_chordChart2 = d3.select("#chord-chart2")
         .append("svg")
         .attr("width",ch_width)
         .attr("height",ch_height)
@@ -184,9 +196,9 @@
             //console.log(ch_chords);
 
             //Draw the diagram
-            ch_chordChart.attr("transform", `translate(${ch_width / 2.0},${ch_height / 2.0})`);
+            ch_chordChart1.attr("transform", `translate(${ch_width / 2.0},${ch_height / 2.0})`);
 
-            let ch_ringContainer = ch_chordChart.append("g");
+            let ch_ringContainer = ch_chordChart1.append("g");
             let ch_rings = ch_ringContainer.selectAll("g.segment")
                 .data(ch_chords.groups)
                 .join("g")
@@ -197,7 +209,7 @@
                 .attr("stroke", d => ch_colorScale(ch_nodes[d.index].country))
                 .attr("d", ch_arc);
 
-            let ch_ribbonContainer = ch_chordChart.append("g");
+            let ch_ribbonContainer = ch_chordChart1.append("g");
             let ch_ribbons = ch_ribbonContainer.selectAll("path.ribbon")
                 .data(ch_chords)
                 .join("path")
@@ -234,15 +246,16 @@
             function ch_wrap(text, width) {
                 text.each(function() {
                     var text = d3.select(this),
-                        words = text.text().split(/\s+/),
+                        words = text.text().split(/\s+/).reverse(),
                         word,
                         line = [],
                         lineNumber = 0,
                         lineHeight = 1.1, // ems
 
                         y = text.attr("y"),
-                        dy = parseFloat(text.attr("dy")),
-                        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y-5).attr("dy", dy + "em")
+                        dy=0.01,
+                        //dy = parseFloat(text.attr("dy")),
+                        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y-10).attr("dy", dy + "em")
                     while (word = words.pop()) {
                         line.push(word)
                         tspan.text(line.join(" "))
@@ -250,7 +263,7 @@
                             line.pop()
                             tspan.text(line.join(" "))
                             line = [word]
-                            tspan = text.append("tspan").attr("x", 0).attr("y", y-5).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
+                            tspan = text.append("tspan").attr("x", 0).attr("y", y-10).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
                         }
                     }
                 })
