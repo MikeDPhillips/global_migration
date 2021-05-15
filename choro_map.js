@@ -11,7 +11,7 @@ let wmSvg = d3.select("#world-chart").append("svg")
     .attr("width", wmWidth)
     .attr("height", wmHeight)
 
-console.log(wmSvg);
+
 let wmMap = wmSvg.append("g").attr("transform", `translate(${wmMargin.left}, ${wmMargin.top})`)
 
 Promise.all([d3.json("data/countries-110m-noant.json"),
@@ -23,7 +23,8 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
       console.log(wmPop)
       let wmCountries = topojson.feature(wmGeomap, wmGeomap.objects.countries);
       let wmMesh = topojson.mesh(wmGeomap, wmGeomap.objects.countries);
-
+  console.log(wmCountries)
+      console.log(wmCountries.features)
       //Color for map
       let wmPopExtent = d3.extent(wmPop, d => d.Total)
 
@@ -44,7 +45,8 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
           .attr("note", d=>d.id)
           .attr("d", wmPath)
           .attr("fill", d => {
-            d.pop = getPopulation(wmPop, d.properties.name, '2019');
+            if(d.id == undefined) console.log(d)
+            d.pop = getPopulation(wmPop, d.id, '2019');
              return( fillScale(d.pop));
       })
           .on("mouseenter", (event, d) => {
@@ -65,7 +67,8 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
     }); //end of then
 
 function getPopulation(data, id, year) {
-  let val = data.filter( d => d.Country === id & d.Year == year);
+  let val = data.filter( d => d['country.code'] === id & d.Year == year);
+
   if(val.length == 0) {    console.log(id); return null;}
   else {
 

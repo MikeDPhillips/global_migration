@@ -28,3 +28,17 @@ region_data %>%
 
 write.csv(cleaned_data, "region20_matrix.csv", row.names = F)
 
+
+
+latest <- subset(population, population$Year==2019 | population$Year==2018)
+names(latest) <- c("Country", "alpha.3", "Year", "Total")
+codes <- read.csv("all.csv", stringsAsFactors = F)
+
+dplyr::left_join(latest, codes, by="alpha.3") %>%
+  select(Country, alpha.3, country.code, region, sub.region, Year, Total) %>%
+  mutate(alpha.3 = str_pad(alpha.3, 3, pad = "0")-> latest2
+write.csv(latest2, "total_population.csv", row.names = F)
+
+
+codes <- read.csv("all.csv", stringsAsFactors = F)
+js <- jsonlite::read_json("countries-110m-noant.json")
