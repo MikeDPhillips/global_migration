@@ -4,51 +4,19 @@
     <meta charset="UTF-8">
     <title>Data Visualization Final Porjection</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 
-    <style>
-        .navbar-inverse {
-            background-color: #3d4a57;
-            border-color: #333;
-        }
-        .navbar-inverse .navbar-nav > li > a,
-        .navbar span.navbar-brand {
-            font-family: 'Montserrat',sans-serif;
-            font-weight: 600;
-            font-size: 18px;
-            color: #fbfbfb;
-            text-decoration: none;
-        }
+    <script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
+    <script>
 
-        .chart-wrapper {
-            background: #fff;
-            border: 1px solid #e2e2e2;
-            border-radius: 3px;
-            margin-bottom: 10px;
-        }
-        .chart-wrapper .chart-title {
-            border-bottom: 1px solid #d7d7d7;
-            color: #666;
-            font-size: 14px;
-            font-family: 'Montserrat',sans-serif;
-            font-weight: 600;
-            padding: 7px 10px 4px;
-        }
+        var aitoff = d3.geoAitoff();
 
-        .chart-wrapper .chart-stage {
-            /*min-height: 240px;*/
-            overflow: hidden;
-            padding: 5px 10px;
-            position: relative;
-        }
+    </script>
 
-        .container_chord{
-            float:left;
-        }
-    </style>
 </head>
-<body>
 
 <body class=""application>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -63,7 +31,7 @@
     <!--first row-->
     <!-- Columns are always 50% wide, on mobile and desktop -->
     <div class="row">
-        <div class="col-6">
+        <div class="col-6" id="global-map">
             <div class="chart-wrapper">
                 <div class="chart-title">
                 World Map
@@ -311,5 +279,6 @@
 
 
 </script>
+<script src="choro_map.js"></script>
 </body>
 </html>

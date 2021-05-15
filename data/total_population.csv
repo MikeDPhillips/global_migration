@@ -1,0 +1,485 @@
+"Country","Code","Year","Total"
+"Afghanistan","AFG",2018,37172000
+"Afghanistan","AFG",2019,38042000
+"Africa",NA,2018,1275921024
+"Africa",NA,2019,1308064000
+"Albania","ALB",2018,2883000
+"Albania","ALB",2019,2881000
+"Algeria","DZA",2018,42228000
+"Algeria","DZA",2019,43053000
+"American Samoa","ASM",2018,55000
+"American Samoa","ASM",2019,55000
+"Andorra","AND",2018,77000
+"Andorra","AND",2019,77000
+"Angola","AGO",2018,30810000
+"Angola","AGO",2019,31825000
+"Anguilla","AIA",2018,15000
+"Anguilla","AIA",2019,15000
+"Antigua and Barbuda","ATG",2018,96000
+"Antigua and Barbuda","ATG",2019,97000
+"Argentina","ARG",2018,44361000
+"Argentina","ARG",2019,44781000
+"Armenia","ARM",2018,2952000
+"Armenia","ARM",2019,2958000
+"Aruba","ABW",2018,106000
+"Aruba","ABW",2019,106000
+"Asia",NA,2018,4560667136
+"Asia",NA,2019,4601371136
+"Australia","AUS",2018,24898000
+"Australia","AUS",2019,25203000
+"Austria","AUT",2018,8891000
+"Austria","AUT",2019,8955000
+"Azerbaijan","AZE",2018,9950000
+"Azerbaijan","AZE",2019,10048000
+"Bahamas","BHS",2018,386000
+"Bahamas","BHS",2019,389000
+"Bahrain","BHR",2018,1569000
+"Bahrain","BHR",2019,1641000
+"Bangladesh","BGD",2018,161376992
+"Bangladesh","BGD",2019,163046000
+"Barbados","BRB",2018,287000
+"Barbados","BRB",2019,287000
+"Belarus","BLR",2018,9453000
+"Belarus","BLR",2019,9452000
+"Belgium","BEL",2018,11482000
+"Belgium","BEL",2019,11539000
+"Belize","BLZ",2018,383000
+"Belize","BLZ",2019,390000
+"Benin","BEN",2018,11485000
+"Benin","BEN",2019,11801000
+"Bermuda","BMU",2018,63000
+"Bermuda","BMU",2019,63000
+"Bhutan","BTN",2018,754000
+"Bhutan","BTN",2019,763000
+"Bolivia","BOL",2018,11353000
+"Bolivia","BOL",2019,11513000
+"Bonaire Sint Eustatius and Saba","BES",2018,26000
+"Bonaire Sint Eustatius and Saba","BES",2019,26000
+"Bosnia and Herzegovina","BIH",2018,3324000
+"Bosnia and Herzegovina","BIH",2019,3301000
+"Botswana","BWA",2018,2254000
+"Botswana","BWA",2019,2304000
+"Brazil","BRA",2018,209468992
+"Brazil","BRA",2019,211050000
+"British Virgin Islands","VGB",2018,30000
+"British Virgin Islands","VGB",2019,30000
+"Brunei","BRN",2018,429000
+"Brunei","BRN",2019,433000
+"Bulgaria","BGR",2018,7052000
+"Bulgaria","BGR",2019,7e+06
+"Burkina Faso","BFA",2018,19751000
+"Burkina Faso","BFA",2019,20321000
+"Burundi","BDI",2018,11175000
+"Burundi","BDI",2019,11531000
+"Cambodia","KHM",2018,16250000
+"Cambodia","KHM",2019,16487000
+"Cameroon","CMR",2018,25216000
+"Cameroon","CMR",2019,25876000
+"Canada","CAN",2018,37075000
+"Canada","CAN",2019,37411000
+"Cape Verde","CPV",2018,544000
+"Cape Verde","CPV",2019,550000
+"Cayman Islands","CYM",2018,64000
+"Cayman Islands","CYM",2019,65000
+"Central African Republic","CAF",2018,4666000
+"Central African Republic","CAF",2019,4745000
+"Chad","TCD",2018,15478000
+"Chad","TCD",2019,15947000
+"Channel Islands","OWID_CIS",2018,170000
+"Channel Islands","OWID_CIS",2019,172000
+"Chile","CHL",2018,18729000
+"Chile","CHL",2019,18952000
+"China","CHN",2018,1427648000
+"China","CHN",2019,1433784064
+"Colombia","COL",2018,49661000
+"Colombia","COL",2019,50339000
+"Comoros","COM",2018,832000
+"Comoros","COM",2019,851000
+"Congo","COG",2018,5244000
+"Congo","COG",2019,5381000
+"Cook Islands","COK",2018,18000
+"Cook Islands","COK",2019,18000
+"Costa Rica","CRI",2018,4999000
+"Costa Rica","CRI",2019,5048000
+"Cote d'Ivoire","CIV",2018,25069000
+"Cote d'Ivoire","CIV",2019,25717000
+"Croatia","HRV",2018,4156000
+"Croatia","HRV",2019,4130000
+"Cuba","CUB",2018,11338000
+"Cuba","CUB",2019,11333000
+"Curacao","CUW",2018,163000
+"Curacao","CUW",2019,163000
+"Cyprus","CYP",2018,1189000
+"Cyprus","CYP",2019,1199000
+"Czechia","CZE",2018,10666000
+"Czechia","CZE",2019,10689000
+"Democratic Republic of Congo","COD",2018,84068000
+"Democratic Republic of Congo","COD",2019,86791000
+"Denmark","DNK",2018,5752000
+"Denmark","DNK",2019,5772000
+"Djibouti","DJI",2018,959000
+"Djibouti","DJI",2019,974000
+"Dominica","DMA",2018,72000
+"Dominica","DMA",2019,72000
+"Dominican Republic","DOM",2018,10627000
+"Dominican Republic","DOM",2019,10739000
+"Ecuador","ECU",2018,17084000
+"Ecuador","ECU",2019,17374000
+"Egypt","EGY",2018,98424000
+"Egypt","EGY",2019,100388000
+"El Salvador","SLV",2018,6421000
+"El Salvador","SLV",2019,6454000
+"Equatorial Guinea","GNQ",2018,1309000
+"Equatorial Guinea","GNQ",2019,1356000
+"Eritrea","ERI",2018,3453000
+"Eritrea","ERI",2019,3497000
+"Estonia","EST",2018,1323000
+"Estonia","EST",2019,1326000
+"Eswatini","SWZ",2018,1136000
+"Eswatini","SWZ",2019,1148000
+"Ethiopia","ETH",2018,109224000
+"Ethiopia","ETH",2019,112079000
+"Europe",NA,2018,746419008
+"Europe",NA,2019,747182976
+"Faeroe Islands","FRO",2018,48000
+"Faeroe Islands","FRO",2019,49000
+"Falkland Islands","FLK",2018,3000
+"Falkland Islands","FLK",2019,3000
+"Fiji","FJI",2018,883000
+"Fiji","FJI",2019,890000
+"Finland","FIN",2018,5523000
+"Finland","FIN",2019,5532000
+"France","FRA",2018,64991000
+"France","FRA",2019,65130000
+"French Guiana","GUF",2018,283000
+"French Guiana","GUF",2019,291000
+"French Polynesia","PYF",2018,278000
+"French Polynesia","PYF",2019,279000
+"Gabon","GAB",2018,2119000
+"Gabon","GAB",2019,2173000
+"Gambia","GMB",2018,2280000
+"Gambia","GMB",2019,2348000
+"Georgia","GEO",2018,4003000
+"Georgia","GEO",2019,3997000
+"Germany","DEU",2018,83124000
+"Germany","DEU",2019,83517000
+"Ghana","GHA",2018,29767000
+"Ghana","GHA",2019,30418000
+"Gibraltar","GIB",2018,34000
+"Gibraltar","GIB",2019,34000
+"Greece","GRC",2018,10522000
+"Greece","GRC",2019,10473000
+"Greenland","GRL",2018,57000
+"Greenland","GRL",2019,57000
+"Grenada","GRD",2018,111000
+"Grenada","GRD",2019,112000
+"Guadeloupe","GLP",2018,4e+05
+"Guadeloupe","GLP",2019,4e+05
+"Guam","GUM",2018,166000
+"Guam","GUM",2019,167000
+"Guatemala","GTM",2018,17248000
+"Guatemala","GTM",2019,17581000
+"Guinea","GIN",2018,12414000
+"Guinea","GIN",2019,12771000
+"Guinea-Bissau","GNB",2018,1874000
+"Guinea-Bissau","GNB",2019,1921000
+"Guyana","GUY",2018,779000
+"Guyana","GUY",2019,783000
+"Haiti","HTI",2018,11123000
+"Haiti","HTI",2019,11263000
+"Honduras","HND",2018,9588000
+"Honduras","HND",2019,9746000
+"Hong Kong","HKG",2018,7372000
+"Hong Kong","HKG",2019,7436000
+"Hungary","HUN",2018,9708000
+"Hungary","HUN",2019,9685000
+"Iceland","ISL",2018,337000
+"Iceland","ISL",2019,339000
+"India","IND",2018,1352642048
+"India","IND",2019,1366418048
+"Indonesia","IDN",2018,267671008
+"Indonesia","IDN",2019,270625984
+"Iran","IRN",2018,81800000
+"Iran","IRN",2019,82914000
+"Iraq","IRQ",2018,38434000
+"Iraq","IRQ",2019,39310000
+"Ireland","IRL",2018,4819000
+"Ireland","IRL",2019,4882000
+"Isle of Man","IMN",2018,84000
+"Isle of Man","IMN",2019,85000
+"Israel","ISR",2018,8382000
+"Israel","ISR",2019,8519000
+"Italy","ITA",2018,60627000
+"Italy","ITA",2019,60550000
+"Jamaica","JAM",2018,2935000
+"Jamaica","JAM",2019,2948000
+"Japan","JPN",2018,127202000
+"Japan","JPN",2019,126860000
+"Jordan","JOR",2018,9965000
+"Jordan","JOR",2019,10102000
+"Kazakhstan","KAZ",2018,18320000
+"Kazakhstan","KAZ",2019,18551000
+"Kenya","KEN",2018,51393000
+"Kenya","KEN",2019,52574000
+"Kiribati","KIR",2018,116000
+"Kiribati","KIR",2019,118000
+"Kuwait","KWT",2018,4137000
+"Kuwait","KWT",2019,4207000
+"Kyrgyzstan","KGZ",2018,6304000
+"Kyrgyzstan","KGZ",2019,6416000
+"Laos","LAO",2018,7061000
+"Laos","LAO",2019,7169000
+"Latin America",NA,2018,642217024
+"Latin America",NA,2019,648121024
+"Latvia","LVA",2018,1928000
+"Latvia","LVA",2019,1907000
+"Lebanon","LBN",2018,6859000
+"Lebanon","LBN",2019,6856000
+"Lesotho","LSO",2018,2108000
+"Lesotho","LSO",2019,2125000
+"Liberia","LBR",2018,4819000
+"Liberia","LBR",2019,4937000
+"Libya","LBY",2018,6679000
+"Libya","LBY",2019,6777000
+"Liechtenstein","LIE",2018,38000
+"Liechtenstein","LIE",2019,38000
+"Lithuania","LTU",2018,2801000
+"Lithuania","LTU",2019,2760000
+"Luxembourg","LUX",2018,604000
+"Luxembourg","LUX",2019,616000
+"Macao","MAC",2018,632000
+"Macao","MAC",2019,640000
+"Madagascar","MDG",2018,26262000
+"Madagascar","MDG",2019,26969000
+"Malawi","MWI",2018,18143000
+"Malawi","MWI",2019,18629000
+"Malaysia","MYS",2018,31528000
+"Malaysia","MYS",2019,31950000
+"Maldives","MDV",2018,516000
+"Maldives","MDV",2019,531000
+"Mali","MLI",2018,19078000
+"Mali","MLI",2019,19658000
+"Malta","MLT",2018,439000
+"Malta","MLT",2019,440000
+"Marshall Islands","MHL",2018,58000
+"Marshall Islands","MHL",2019,59000
+"Martinique","MTQ",2018,376000
+"Martinique","MTQ",2019,376000
+"Mauritania","MRT",2018,4403000
+"Mauritania","MRT",2019,4526000
+"Mauritius","MUS",2018,1267000
+"Mauritius","MUS",2019,1270000
+"Mayotte","MYT",2018,260000
+"Mayotte","MYT",2019,266000
+"Mexico","MEX",2018,126191000
+"Mexico","MEX",2019,127576000
+"Micronesia (country)","FSM",2018,113000
+"Micronesia (country)","FSM",2019,114000
+"Moldova","MDA",2018,4052000
+"Moldova","MDA",2019,4043000
+"Monaco","MCO",2018,39000
+"Monaco","MCO",2019,39000
+"Mongolia","MNG",2018,3170000
+"Mongolia","MNG",2019,3225000
+"Montenegro","MNE",2018,628000
+"Montenegro","MNE",2019,628000
+"Montserrat","MSR",2018,5000
+"Montserrat","MSR",2019,5000
+"Morocco","MAR",2018,36029000
+"Morocco","MAR",2019,36472000
+"Mozambique","MOZ",2018,29496000
+"Mozambique","MOZ",2019,30366000
+"Myanmar","MMR",2018,53708000
+"Myanmar","MMR",2019,54045000
+"Namibia","NAM",2018,2448000
+"Namibia","NAM",2019,2495000
+"Nauru","NRU",2018,11000
+"Nauru","NRU",2019,11000
+"Nepal","NPL",2018,28096000
+"Nepal","NPL",2019,28609000
+"Netherlands","NLD",2018,17060000
+"Netherlands","NLD",2019,17097000
+"New Caledonia","NCL",2018,280000
+"New Caledonia","NCL",2019,283000
+"New Zealand","NZL",2018,4743000
+"New Zealand","NZL",2019,4783000
+"Nicaragua","NIC",2018,6466000
+"Nicaragua","NIC",2019,6546000
+"Niger","NER",2018,22443000
+"Niger","NER",2019,23311000
+"Nigeria","NGA",2018,195875008
+"Nigeria","NGA",2019,200964000
+"Niue","NIU",2018,2000
+"Niue","NIU",2019,2000
+"North America",NA,2018,364296000
+"North America",NA,2019,366600992
+"North Korea","PRK",2018,25550000
+"North Korea","PRK",2019,25666000
+"North Macedonia","MKD",2018,2083000
+"North Macedonia","MKD",2019,2083000
+"Northern Mariana Islands","MNP",2018,57000
+"Northern Mariana Islands","MNP",2019,57000
+"Norway","NOR",2018,5338000
+"Norway","NOR",2019,5379000
+"Oceania",NA,2018,41571000
+"Oceania",NA,2019,42128000
+"Oman","OMN",2018,4829000
+"Oman","OMN",2019,4975000
+"Pakistan","PAK",2018,212228000
+"Pakistan","PAK",2019,216564992
+"Palau","PLW",2018,18000
+"Palau","PLW",2019,18000
+"Palestine","PSE",2018,4863000
+"Palestine","PSE",2019,4981000
+"Panama","PAN",2018,4177000
+"Panama","PAN",2019,4246000
+"Papua New Guinea","PNG",2018,8606000
+"Papua New Guinea","PNG",2019,8776000
+"Paraguay","PRY",2018,6956000
+"Paraguay","PRY",2019,7045000
+"Peru","PER",2018,31989000
+"Peru","PER",2019,32510000
+"Philippines","PHL",2018,106651000
+"Philippines","PHL",2019,108117000
+"Poland","POL",2018,37922000
+"Poland","POL",2019,37888000
+"Portugal","PRT",2018,10256000
+"Portugal","PRT",2019,10226000
+"Puerto Rico","PRI",2018,3040000
+"Puerto Rico","PRI",2019,2933000
+"Qatar","QAT",2018,2782000
+"Qatar","QAT",2019,2832000
+"Reunion","REU",2018,883000
+"Reunion","REU",2019,889000
+"Romania","ROU",2018,19506000
+"Romania","ROU",2019,19365000
+"Russia","RUS",2018,145734000
+"Russia","RUS",2019,145872000
+"Rwanda","RWA",2018,12302000
+"Rwanda","RWA",2019,12627000
+"Saint Barthlemy",NA,2018,10000
+"Saint Barthlemy",NA,2019,10000
+"Saint Helena","SHN",2018,6000
+"Saint Helena","SHN",2019,6000
+"Saint Kitts and Nevis","KNA",2018,52000
+"Saint Kitts and Nevis","KNA",2019,53000
+"Saint Lucia","LCA",2018,182000
+"Saint Lucia","LCA",2019,183000
+"Saint Martin (French part)","MAF",2018,37000
+"Saint Martin (French part)","MAF",2019,38000
+"Saint Pierre and Miquelon","SPM",2018,6000
+"Saint Pierre and Miquelon","SPM",2019,6000
+"Saint Vincent and the Grenadines","VCT",2018,110000
+"Saint Vincent and the Grenadines","VCT",2019,111000
+"Samoa","WSM",2018,196000
+"Samoa","WSM",2019,197000
+"San Marino","SMR",2018,34000
+"San Marino","SMR",2019,34000
+"Sao Tome and Principe","STP",2018,211000
+"Sao Tome and Principe","STP",2019,215000
+"Saudi Arabia","SAU",2018,33703000
+"Saudi Arabia","SAU",2019,34269000
+"Senegal","SEN",2018,15854000
+"Senegal","SEN",2019,16296000
+"Serbia","SRB",2018,8803000
+"Serbia","SRB",2019,8772000
+"Seychelles","SYC",2018,97000
+"Seychelles","SYC",2019,98000
+"Sierra Leone","SLE",2018,7650000
+"Sierra Leone","SLE",2019,7813000
+"Singapore","SGP",2018,5758000
+"Singapore","SGP",2019,5804000
+"Sint Maarten (Dutch part)","SXM",2018,42000
+"Sint Maarten (Dutch part)","SXM",2019,42000
+"Slovakia","SVK",2018,5453000
+"Slovakia","SVK",2019,5457000
+"Slovenia","SVN",2018,2078000
+"Slovenia","SVN",2019,2079000
+"Solomon Islands","SLB",2018,653000
+"Solomon Islands","SLB",2019,670000
+"Somalia","SOM",2018,15008000
+"Somalia","SOM",2019,15443000
+"South Africa","ZAF",2018,57793000
+"South Africa","ZAF",2019,58558000
+"South Korea","KOR",2018,51172000
+"South Korea","KOR",2019,51225000
+"South Sudan","SSD",2018,10976000
+"South Sudan","SSD",2019,11062000
+"Spain","ESP",2018,46693000
+"Spain","ESP",2019,46737000
+"Sri Lanka","LKA",2018,21229000
+"Sri Lanka","LKA",2019,21324000
+"Sudan","SDN",2018,41802000
+"Sudan","SDN",2019,42813000
+"Suriname","SUR",2018,576000
+"Suriname","SUR",2019,581000
+"Sweden","SWE",2018,9972000
+"Sweden","SWE",2019,10036000
+"Switzerland","CHE",2018,8526000
+"Switzerland","CHE",2019,8591000
+"Syria","SYR",2018,16945000
+"Syria","SYR",2019,17070000
+"Taiwan","TWN",2018,23726000
+"Taiwan","TWN",2019,23774000
+"Tajikistan","TJK",2018,9101000
+"Tajikistan","TJK",2019,9321000
+"Tanzania","TZA",2018,56313000
+"Tanzania","TZA",2019,58005000
+"Thailand","THA",2018,69428000
+"Thailand","THA",2019,69626000
+"Timor","TLS",2018,1268000
+"Timor","TLS",2019,1293000
+"Togo","TGO",2018,7889000
+"Togo","TGO",2019,8082000
+"Tokelau","TKL",2018,1000
+"Tokelau","TKL",2019,1000
+"Tonga","TON",2018,103000
+"Tonga","TON",2019,104000
+"Trinidad and Tobago","TTO",2018,1390000
+"Trinidad and Tobago","TTO",2019,1395000
+"Tunisia","TUN",2018,11565000
+"Tunisia","TUN",2019,11695000
+"Turkey","TUR",2018,82340000
+"Turkey","TUR",2019,83430000
+"Turkmenistan","TKM",2018,5851000
+"Turkmenistan","TKM",2019,5942000
+"Turks and Caicos Islands","TCA",2018,38000
+"Turks and Caicos Islands","TCA",2019,38000
+"Tuvalu","TUV",2018,12000
+"Tuvalu","TUV",2019,12000
+"Uganda","UGA",2018,42729000
+"Uganda","UGA",2019,44270000
+"Ukraine","UKR",2018,44246000
+"Ukraine","UKR",2019,43994000
+"United Arab Emirates","ARE",2018,9631000
+"United Arab Emirates","ARE",2019,9771000
+"United Kingdom","GBR",2018,67142000
+"United Kingdom","GBR",2019,67530000
+"United States","USA",2018,327096000
+"United States","USA",2019,329064992
+"United States Virgin Islands","VIR",2018,105000
+"United States Virgin Islands","VIR",2019,105000
+"Uruguay","URY",2018,3449000
+"Uruguay","URY",2019,3462000
+"Uzbekistan","UZB",2018,32476000
+"Uzbekistan","UZB",2019,32982000
+"Vanuatu","VUT",2018,293000
+"Vanuatu","VUT",2019,3e+05
+"Vatican","VAT",2018,1000
+"Vatican","VAT",2019,1000
+"Venezuela","VEN",2018,28887000
+"Venezuela","VEN",2019,28516000
+"Vietnam","VNM",2018,95546000
+"Vietnam","VNM",2019,96462000
+"Wallis and Futuna","WLF",2018,12000
+"Wallis and Futuna","WLF",2019,11000
+"Western Sahara","ESH",2018,567000
+"Western Sahara","ESH",2019,582000
+"World","OWID_WRL",2018,7631091200
+"World","OWID_WRL",2019,7713467904
+"Yemen","YEM",2018,28499000
+"Yemen","YEM",2019,29162000
+"Zambia","ZMB",2018,17352000
+"Zambia","ZMB",2019,17861000
+"Zimbabwe","ZWE",2018,14439000
+"Zimbabwe","ZWE",2019,14645000

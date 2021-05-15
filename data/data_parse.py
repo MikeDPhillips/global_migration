@@ -6,7 +6,7 @@ Created on Sun May  9 17:48:33 2021
 @author: mdp38
 """
 
-import codes
+import codecs
 import json
 
 def save_json(li, filename = "lotr.json"):
@@ -21,9 +21,6 @@ outfilename = "region20.json"
 indexes = [ 903, 935, 908, 904, 905, 909]
 
 def read_matrix(filename):
-    
-    
-    
     with open(filename) as infile:  
         lines = infile.readlines()
 
@@ -31,7 +28,7 @@ def read_matrix(filename):
     nodes = []
     for i in range(0, len(origins)):
         new_node = {}
-        new_node['country'] = origins[i]
+        new_node['country'] = origins[i].strip('"')
         new_node['id'] = indexes[i]
         nodes.append(new_node)
         
@@ -43,8 +40,8 @@ def read_matrix(filename):
        #new_edge['target'] = elements[0]
         for j, orig in enumerate(origins):
             new_edge ={}
-            new_edge['source'] = orig
-            new_edge['target'] = elements[0]
+            new_edge['source'] = orig.strip('"')
+            new_edge['target'] = elements[0].strip('"')
             new_edge['weight'] = elements[j+1]
             print(new_edge)
             edges.append(new_edge)
@@ -52,3 +49,5 @@ def read_matrix(filename):
     results = {}
     results['nodes'] = nodes
     results['edges'] = edges
+    
+save_json(results, "migration2020.json")
