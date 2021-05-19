@@ -5,6 +5,7 @@
     <title>Data Visualization Final Porjection</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -31,31 +32,36 @@
     <!--first row-->
     <!-- Columns are always 50% wide, on mobile and desktop -->
     <div class="row">
-        <div class="col-6" id="global-map">
+        <div class="col-8" id="global-map">
             <div class="chart-wrapper">
                 <div class="chart-title">
                 World Map
                     </div>
             <div class="chart-stage">
-                <div id="world-chart"></div>
-            </div>
-            </div>
-            </div>
+                <div id="world-chart"><p id="value-time"></p></div>
+                <!--<div id="mySlider"></div>-->
+                <!--  <div class="row align-items-center">
+                      <div class="col-sm-2"><p id="value-time"></p></div>
+                      <div class="col-sm"><div id="slider-time"></div></div>
+                  </div>-->
+              </div>
+              </div>
+              </div>
 
-        <div class="col-6">
-            <div class="chart-wrapper">
-                <div class="chart-title">
-                    Selected Country
-                </div>
-            <div class="chart-stage">
-                <div id="country-chart">
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
+          <div class="col-4">
+              <div class="chart-wrapper">
+                  <div class="chart-title">
+                      Selected Country
+                  </div>
+              <div class="chart-stage">
+                  <div id="country-chart">
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
 
-    <!--second row-->
+      <!--second row-->
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <div class="row">
         <div class="col-6">

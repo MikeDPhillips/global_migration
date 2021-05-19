@@ -1,0 +1,119 @@
+<html><head>
+<title>INFO 3300 - Animation Challenge</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script>
+    // Generate some random points - DO NOT MODIFY THIS SECTION
+    const colorScale = d3.scaleOrdinal(d3.schemeSet1); function getRandomPoints(o){let r=d3.randomUniform(10,490),n=d3.randomUniform(10,290),t=d3.randomUniform(0,3),a=[];for(let f=0;f<o;f++)a.push({x:Math.floor(r()),y:Math.floor(n()),color:colorScale(Math.floor(t()))});return a}
+  </script>
+
+
+
+</head>
+<body>
+  <div style="position: relative;width: 100%;max-width: 800px;margin: 0 auto;">
+    
+  <h4>yx265 - Animation Challenge</h4>
+  
+  <h4> Chart 1 - Animate everything at once:</h4>
+  <svg id="chart1" width="500" height="300"></svg>
+  <button id="animate1">Animate</button>
+  <h4> Chart 2 - Animate channels by step (x, y, color):</h4>
+  <svg id="chart2" width="500" height="300"></svg>
+  <button id="animate2">Animate</button>
+  <h4> Chart 3 - Step through each point and animate:</h4>
+  <svg id="chart3" width="500" height="300"></svg>
+  <button id="animate3">Animate</button>
+  
+  <script>
+  // CHART 1 - ANIMATE ALL AT ONCE
+  const svg1 = d3.select("svg#chart1");
+  svg1.selectAll("circle.point").data( getRandomPoints(40) ).join("circle").attr("class","point").attr("r", 8).attr("cx", d => d.x).attr("cy", d => d.y).style("fill", d => d.color);
+
+  let x_new = d3.randomUniform(10,490)
+  let y_new = d3.randomUniform(10,290)
+  let t=d3.randomUniform(0,3)
+
+
+  function animateChart1() {
+      // MODIFY HERE FOR YOUR ANIMATION CODE
+      //  Edit code after .join("circle") to make this animated
+      svg1.selectAll("circle.point").data( getRandomPoints(40) )
+          .join("circle")
+             // ** Animate everything at once **
+              .transition()
+              .attr("class","point")
+              .attr("r", 8)
+              .attr("cx",x_new)
+              .attr("cy",y_new)
+              .style("fill",colorScale(Math.floor(t())))
+
+  }
+  d3.select("#animate1").on("click", animateChart1);  
+  
+  </script>
+  
+  
+  <script>
+  // CHART 2 - ANIMATE EACH CHANNEL ONE BY ONE
+  const svg2 = d3.select("svg#chart2");
+  svg2.selectAll("circle.point").data( getRandomPoints(40) ).join("circle").attr("class","point").attr("r", 8).attr("cx", d => d.x).attr("cy", d => d.y).style("fill", d => d.color);
+  
+  function animateChart2() {
+      // MODIFY HERE FOR YOUR ANIMATION CODE
+      //  Edit code after .join("circle") to make this animated
+     let trans =  svg2.selectAll("circle.point").data( getRandomPoints(40) )
+          .join("circle")
+             // ** Animate channels by step (x, y, color) **
+            .transition()
+             .attr("class","point")
+             .attr("r", 8)
+             .attr("cx",x_new)
+             .ease(d3.easeLinear)
+             .style("fill", d => d.color)
+
+             .transition()
+             .delay(200)
+             .ease(d3.easeLinear)
+             .attr("cy",y_new)
+
+             .transition()
+             .ease(d3.easeLinear)
+             .delay(200)
+             .style("fill",colorScale(Math.floor(t())))
+  }
+  d3.select("#animate2").on("click", animateChart2);  
+  
+  </script>
+  
+  
+  <script>
+  // CHART 3 - ANIMATE EACH POINT INDIVIDUALLY
+  const svg3 = d3.select("svg#chart3");
+  svg3.selectAll("circle.point").data( getRandomPoints(40) ).join("circle").attr("class","point").attr("r", 8).attr("cx", d => d.x).attr("cy", d => d.y).style("fill", d => d.color);
+
+  function animateChart3() {
+      // MODIFY HERE FOR YOUR ANIMATION CODE
+      //  Edit code after .join("circle") to make this animated
+
+      svg3.selectAll("circle.point").data( getRandomPoints(40) )
+          .join("circle")
+              .transition()
+             // ** Step through each point one by one and animate **
+             //  (it should automatically step through points in order, only pressing Animate once)
+              .delay(function(d,i){return(i*500)})
+              .duration(2000)
+              .ease(d3.easeExpOut)
+              .attr("class","point")
+              .attr("r", 8)
+              .attr("cx", x_new)
+              .attr("cy", y_new)
+              .style("fill", colorScale(Math.floor(t())))
+  }
+  d3.select("#animate3").on("click", animateChart3);  
+
+  </script>
+
+  </div>
+
+</body>
+</html>

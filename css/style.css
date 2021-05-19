@@ -1,5 +1,5 @@
 path.country {
-
+    stroke: white;
 }
 
 path.outline {
@@ -49,4 +49,24 @@ stroke:none;
 .container_chord{
     float:left;
 }
+
+.legend {
+    position:absolute;
+    left:600px;
+    top:570px;
+}
+
+.slider {
+    position:absolute;
+    left:10px;
+    top:580px;
+}
+
+#value-time{
+    color:  #ccc;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:500;
+    font-size: 50px;
+}
+
 
