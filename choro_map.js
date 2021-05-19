@@ -15,12 +15,18 @@ let wmSvg = d3.select("#world-chart").append("svg")
 let wmMap = wmSvg.append("g").attr("transform", `translate(${wmMargin.left}, ${wmMargin.top})`)
 
 Promise.all([d3.json("data/countries-110m-noant.json"),
-    d3.csv("data/total_population.csv", d3.autoType())]
+    d3.csv("data/total_population.csv", d3.autoType()),
+    d3.csv("data/pop_data_long.csv", d3.autoType()),
+    d3.csv("data/pop_data_wide.csv", d3.autoType())]
 )
 
-    .then( ([wmGeomap, wmPop]) => {
+    .then( ([wmGeomap, wmPop, long, wide]) => {
       console.log("Here comes the csv")
       console.log(wmPop)
+      console.log("LONG")
+      console.log(long)
+      console.log("WIDE")
+      console.log(wide)
       let wmCountries = topojson.feature(wmGeomap, wmGeomap.objects.countries);
       let wmMesh = topojson.mesh(wmGeomap, wmGeomap.objects.countries);
   console.log(wmCountries)
