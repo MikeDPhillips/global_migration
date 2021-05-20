@@ -21,16 +21,11 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
 )
 
     .then( ([wmGeomap, wmPop, long, wide]) => {
-    /*  console.log("Here comes the csv")
-      console.log(wmPop)
-      console.log("LONG")
-      console.log(long)
-      console.log("WIDE")
-      console.log(wide)*/
+
       let wmCountries = topojson.feature(wmGeomap, wmGeomap.objects.countries);
       let wmMesh = topojson.mesh(wmGeomap, wmGeomap.objects.countries);
-  console.log(wmCountries)
-      console.log(wmCountries.features)
+
+
       //Color for map
       let wmPopExtent = d3.extent(wmPop, d => d.Total)
 

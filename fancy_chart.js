@@ -16,10 +16,17 @@ Promise.all([
 ).then( ([long]) => {
     console.log("Here comes the csv")
     console.log("LONG")
+
+   long.forEach( d => {
+        d.value = Number(d.value);
+    })
+
     let newLong = long.filter(function(d){return d.indicator == "growth_rate" || d.indicator == "natural_increase"})
     let long1 = newLong.filter(function(d){return d.indicator == "growth_rate"})
     let long2 = newLong.filter(function(d){return d.indicator == "natural_increase"})
 
+    let test = newLong.filter(d => d.value <= 0);
+    console.log(test)
     console.log(newLong)
     console.log(long1)
     console.log(long2)

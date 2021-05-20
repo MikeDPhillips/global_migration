@@ -115,13 +115,12 @@
             rerender(ch_chordChart2);})
 
     function rerender(ch_chordChart) {
-        console.log(window.allData);
         let ch_colorScale = d3.scaleOrdinal().range(d3.schemeTableau10)
 
         let ch_nodes = window.allData.nodes;
-        console.log(ch_nodes);
+
         let ch_names = ch_nodes.map(d => d.country)
-        console.log(ch_names);
+
         let ch_edges = window.allData.edges;
 
         let ch_matrix = [];
@@ -135,14 +134,14 @@
             ch_matrix.push(ch_row);
             ch_connections[i] = [i]; // everything connected to itself!
         }
-        console.log(ch_matrix);
+
 
         ch_edges.forEach(d => {
-            //console.log(d);
+
             let ch_SourceIndex = ch_names.indexOf(d.source)
             let ch_TargetIndex = ch_names.indexOf(d.target)
-            //console.log(ch_SourceIndex)
-            // console.log(ch_TargetIndex)
+
+
             if (d["weight"] > 0) {
                 ch_matrix[ch_SourceIndex][ch_TargetIndex] = d["weight"];
                 ch_matrix[ch_TargetIndex][ch_SourceIndex] = d["weight"];
@@ -152,8 +151,6 @@
             }
         });
 
-        console.log(ch_matrix);
-        console.log(ch_connections);
 
         let ch_arc = d3.arc()
             .innerRadius(ch_innerRadius)
@@ -168,7 +165,6 @@
             .radius(ch_innerRadius);
 
         let ch_chords = ch_layout(ch_matrix);
-        //console.log(ch_chords);
 
         //Draw the diagram
         ch_chordChart.attr("transform", `translate(${ch_width / 2.0},${ch_height / 2.0})`);
