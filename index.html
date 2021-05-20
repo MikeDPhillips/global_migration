@@ -39,11 +39,6 @@
                     </div>
             <div class="chart-stage">
                 <div id="world-chart"><p id="value-time"></p></div>
-                <!--<div id="mySlider"></div>-->
-                <!--  <div class="row align-items-center">
-                      <div class="col-sm-2"><p id="value-time"></p></div>
-                      <div class="col-sm"><div id="slider-time"></div></div>
-                  </div>-->
               </div>
               </div>
               </div>
@@ -55,6 +50,7 @@
                   </div>
               <div class="chart-stage">
                   <div id="country-chart">
+                      <p id="country-name"></p>
                   </div>
               </div>
           </div>
@@ -89,8 +85,8 @@
 
 <script>
     let ch_margin = {top: 200, right: 250, bottom: 200, left: 150},
-        ch_width = 750 - ch_margin.left - ch_margin.right,
-        ch_height = 750 - ch_margin.top - ch_margin.bottom,
+        ch_width = 850 - ch_margin.left - ch_margin.right,
+        ch_height = 850 - ch_margin.top - ch_margin.bottom,
         ch_outerRadius = Math.min(ch_width, ch_height) / 2 - 70,
         ch_innerRadius = ch_outerRadius - 30;
 
@@ -286,5 +282,6 @@
 
 </script>
 <script src="choro_map.js"></script>
+<script src="fancy_chart.js"></script>
 </body>
 </html>

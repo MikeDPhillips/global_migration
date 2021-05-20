@@ -21,12 +21,12 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
 )
 
     .then( ([wmGeomap, wmPop, long, wide]) => {
-      console.log("Here comes the csv")
+    /*  console.log("Here comes the csv")
       console.log(wmPop)
       console.log("LONG")
       console.log(long)
       console.log("WIDE")
-      console.log(wide)
+      console.log(wide)*/
       let wmCountries = topojson.feature(wmGeomap, wmGeomap.objects.countries);
       let wmMesh = topojson.mesh(wmGeomap, wmGeomap.objects.countries);
   console.log(wmCountries)
@@ -63,7 +63,6 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
           .attr("class", "outline")
           .attr("d", wmPath)
 
-
         function mouseEntersPlot(event,d) {
 
             d3.selectAll(".country")
@@ -75,6 +74,10 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
                 .transition()
                 .duration(200)
                 .style("opacity", 1)
+
+            d3.select("#country-chart").text(d.properties.name)
+
+
         }
 
         function mouseLeavesPlot() {
@@ -152,9 +155,7 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
             .default(new Date(2008, 10, 3))
             .on('onchange', val => {
                 d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
-                  let new_year = d3.select('p#value-time').text();
-             //   d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
-              //  let new_year = d3.select('p#value-time').text();
+              //    let new_year = d3.select('p#value-time').text();
              //   rerender(new_year);
             });
 
