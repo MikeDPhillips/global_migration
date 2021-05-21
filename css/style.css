@@ -50,6 +50,7 @@ stroke:none;
     float:left;
 }
 
+
 .legend {
     position:absolute;
     left:600px;
@@ -62,11 +63,26 @@ stroke:none;
     top:580px;
 }
 
+.fancyLabel{
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+
+}
+
 #value-time{
     color:  #ccc;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight:500;
     font-size: 50px;
+}
+
+#fancy-value-time{
+    color:  #ccc;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:500;
+    font-size: 30px;
+
 }
 
 
