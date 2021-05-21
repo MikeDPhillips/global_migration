@@ -13,39 +13,54 @@ let fancyChart = fancySvg.append("g").attr("transform", `translate(${fancyMargin
 
 Promise.all([
     d3.csv("data/pop_data_long.csv", d3.autoType())]
-).then( ([long]) => {
-    console.log("Here comes the csv")
-    console.log("LONG")
+).then( ([allPop]) => {
 
-   long.forEach( d => {
+   allPop.forEach( d => {
         d.value = Number(d.value);
+        d.year = Number(d.year);
     })
 
-    let newLong = long.filter(function(d){return d.indicator == "growth_rate" || d.indicator == "natural_increase"})
-    let long1 = newLong.filter(function(d){return d.indicator == "growth_rate"})
-    let long2 = newLong.filter(function(d){return d.indicator == "natural_increase"})
+    console.log(allPop)
 
-    let test = newLong.filter(d => d.value <= 0);
-    console.log(test)
-    console.log(newLong)
-    console.log(long1)
-    console.log(long2)
+  let xKey = "growth_rate"
+  let yKey = "natural_increase"
+  let year = 2016
 
-    let growthExtent = d3.extent(long1, d => d.value);
-    let growthScale = d3.scaleLinear()
-        .domain(growthExtent).range([0, fancy_chart_Width]);
+  let filteredX= allPop.filter(function(d){return d.indicator == "growth_rate" })
+      .filter(d => d.year==year)
+  let filteredY= allPop.filter(function(d){return d.indicator == "natural_increase" })
+      .filter(d => d.year==year)
 
-    console.log(growthExtent)
+  console.log(filteredX)
+  console.log(filteredY)
 
-    let naturalExtent = d3.extent(long2, d=>d.value);
-    let naturalScale = d3.scaleLinear().domain(naturalExtent).range([fancy_chart_Height, 0]);
+  let plotData = []
 
-    console.log(naturalExtent)
-    let naturalMax = d3.max(long2,function(d){return d.value;})
-    console.log(naturalMax)
+  for (let i = 0; i < filteredX.length; ++i) {
+    plotData.push({
+      country : filteredX[i].country,
+      year : filteredX[i].year,
+      xValue : filteredX[i].value,
+      yValue : filteredY[i].value
+    });
+  }
 
-    let yAxis = d3.axisLeft(naturalScale).ticks(10).tickFormat(d3.format(".3f"))
-    let xAxis = d3.axisBottom(growthScale).tickFormat(d3.format(".1f"))
+  console.log(plotData);
+
+
+    let xExtent = d3.extent(plotData, d => d.xValue);
+    let xScale = d3.scaleLinear()
+        .domain(xExtent).range([0, fancy_chart_Width]);
+
+    console.log(xExtent)
+
+    let yExtent = d3.extent(plotData, d=>d.yValue);
+    let yScale = d3.scaleLinear().domain(yExtent).range([fancy_chart_Height, 0]);
+
+    console.log(yExtent)
+
+    let yAxis = d3.axisLeft(yScale).ticks(10).tickFormat(d3.format(".3f"))
+    let xAxis = d3.axisBottom(xScale).tickFormat(d3.format(".1f"))
 
 
     fancySvg.append("g")
@@ -58,4 +73,18 @@ Promise.all([
        // .attr("transform","translate("+fancyMargin.left+","+(fancy_chart_Height+fancyMargin.top)+")")
         .attr("transform","translate(50,"+(fancy_chart_Height-220)+")") //20
         .call(xAxis);
+
+    fancySvg.append('g')
+        .selectAll("dot")
+        .data(plotData)
+        .enter()
+        .append("circle")
+        .attr("country", d => d.country)
+        .attr("cx", d => {
+          return(xScale(d.xValue))
+        })
+        .attr("cy", d => yScale(d.yValue))
+        .attr("r", 5)
+        .style("fill", "#69b3a2")
+
 })
