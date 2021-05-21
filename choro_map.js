@@ -180,7 +180,6 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
                 d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
                 d3.select('p#fancy-value-time').text(d3.timeFormat('%Y')(val))
                 let new_year = d3.select('p#value-time').text();
-                updateFC(new_year);
              //   rerender(new_year);
             });
 
