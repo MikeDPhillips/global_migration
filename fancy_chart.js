@@ -204,6 +204,12 @@ Promise.all([d3.csv("data/pop_data_long.csv", d3.autoType())]
 
 
 
+
     });
+
+function updateFC(newYear) {
+  //update chart hear with newYear value
+  console.log(newYear);
+}
 
 

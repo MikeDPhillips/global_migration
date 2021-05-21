@@ -41,7 +41,7 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
       let wmPopExtent = d3.extent(dataToMap, d => d.value)
 
       let fillScale= d3.scaleQuantile()
-          .domain(dataToMap.map(d => d.Total))
+          .domain(dataToMap.map(d => d.value))
           .range(d3.schemeBlues[9])
 
       let wmProjection = d3.geoNaturalEarth2()
@@ -74,19 +74,21 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
                   .attr("opacity", 0)
                   .attr("fill", d =>  fillScale(d.value))
                   .call( enter => enter.transition().attr('opacity'),1)
-            .update()
+/*            .update()
                 .transition()
                       //.attr("country", d => d3.select(this).attr("note"))
-                      .attr("country", d => d.country)
+                      //.attr("country", d => d.country)
                         .attr("cid", d => d['country.code'])
                         .attr("pop", d => d.value)
-                    .attr("fill", d =>  fillScale(d.value))
+                    .attr("fill", d =>  fillScale(d.value))*/
             .exit()
                 .transition().attr('opacity',0).remove()
       }
 
         function mouseEntersPlot(event,d) {
-          console.log(this.attributes.country.value);
+          console.log(this);
+          console.log(event)
+          console.log(d)
 
             d3.selectAll(".country")
                 .transition()
@@ -148,7 +150,7 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
 
         var x = d3.scaleLinear()
             .range([0, w])
-            .domain(d3.extent(wmPop.map(d => d.Total)))
+            .domain(wmPopExtent )
 
 
         var xAxis = d3.axisBottom(x);
@@ -177,7 +179,8 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
             .on('onchange', val => {
                 d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
                 d3.select('p#fancy-value-time').text(d3.timeFormat('%Y')(val))
-              //    let new_year = d3.select('p#value-time').text();
+                let new_year = d3.select('p#value-time').text();
+                updateFC(new_year);
              //   rerender(new_year);
             });
 
