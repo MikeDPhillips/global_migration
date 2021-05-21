@@ -178,8 +178,12 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
             .default(new Date(2008, 10, 3))
             .on('onchange', val => {
                 d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
+<<<<<<< HEAD
                 d3.select('p#fancy-value-time').text(d3.timeFormat('%Y')(val))
                 let new_year = d3.select('p#value-time').text();
+=======
+              //    let new_year = d3.select('p#value-time').text();
+>>>>>>> parent of bd55aee (add fancy chart)
              //   rerender(new_year);
             });
 
