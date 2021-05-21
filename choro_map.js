@@ -15,22 +15,33 @@ let wmSvg = d3.select("#world-chart").append("svg")
 let wmMap = wmSvg.append("g").attr("transform", `translate(${wmMargin.left}, ${wmMargin.top})`)
 
 Promise.all([d3.json("data/countries-110m-noant.json"),
-    d3.csv("data/total_population.csv", d3.autoType()),
-    d3.csv("data/pop_data_long.csv", d3.autoType()),
-    d3.csv("data/pop_data_wide.csv", d3.autoType())]
-)
+    d3.csv("data/pop_data_long.csv", d3.autoType())])
+    .then( ([wmGeomap, wmAllPop])=> {
 
-    .then( ([wmGeomap, wmPop, long, wide]) => {
 
       let wmCountries = topojson.feature(wmGeomap, wmGeomap.objects.countries);
       let wmMesh = topojson.mesh(wmGeomap, wmGeomap.objects.countries);
 
+      wmAllPop.forEach( d => {
+        d.value = Number(d.value);
+        d.year = Number(d.year);
+      })
+
+      console.log(wmAllPop)
+
+      let indicator = 'total_pop'
+      let wmYear = 2018
+
+      let dataToMap =  wmAllPop.filter(d => d.indicator == indicator)
+          .filter(d => d.year==wmYear)
+
+      console.log(dataToMap)
 
       //Color for map
-      let wmPopExtent = d3.extent(wmPop, d => d.Total)
+      let wmPopExtent = d3.extent(dataToMap, d => d.value)
 
       let fillScale= d3.scaleQuantile()
-          .domain(wmPop.map(d => d.Total))
+          .domain(dataToMap.map(d => d.Total))
           .range(d3.schemeBlues[9])
 
       let wmProjection = d3.geoNaturalEarth2()
@@ -45,11 +56,6 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
           .attr("class", "country")
           .attr("note", d=>d.id)
           .attr("d", wmPath)
-          .attr("fill", d => {
-            if(d.id == undefined) console.log(d)
-            d.pop = getPopulation(wmPop, d.id, '2019');
-             return( fillScale(d.pop));
-      })
           .on("mouseout",  mouseLeavesPlot)
           .on("mouseenter", mouseEntersPlot)
 
@@ -58,7 +64,29 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
           .attr("class", "outline")
           .attr("d", wmPath)
 
+      updateMap(dataToMap);
+
+      function updateMap(newData) {
+        wmMap.selectAll("path.country")
+            .data(newData)
+            .enter()
+                .append("path")
+                  .attr("opacity", 0)
+                  .attr("fill", d =>  fillScale(d.value))
+                  .call( enter => enter.transition().attr('opacity'),1)
+            .update()
+                .transition()
+                      //.attr("country", d => d3.select(this).attr("note"))
+                      .attr("country", d => d.country)
+                        .attr("cid", d => d['country.code'])
+                        .attr("pop", d => d.value)
+                    .attr("fill", d =>  fillScale(d.value))
+            .exit()
+                .transition().attr('opacity',0).remove()
+      }
+
         function mouseEntersPlot(event,d) {
+          console.log(this.attributes.country.value);
 
             d3.selectAll(".country")
                 .transition()
@@ -70,22 +98,20 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
                 .duration(200)
                 .style("opacity", 1)
 
-            d3.select("#country-chart").text(d.properties.name)
-
+            //d3.select("#country-chart").text(d.properties.name)
+          d3.select("#country-chart").text(d.country);
 
         }
 
         function mouseLeavesPlot() {
-
             d3.selectAll(".country")
                 .transition()
                 .duration(200)
                 .style("opacity", 1)
-
         };
 
       //Legend
-        var w = 300, h = 130;
+        let w = 300, h = 130;
         let highColor = d3.schemeBlues[9][8]
         let lowColor = d3.schemeBlues[9][0]
 
@@ -169,13 +195,14 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
         d3.select('p#value-time').text(d3.timeFormat('%Y')(sliderTime.value()));
 
 
+
     }); //end of then
 
-function getPopulation(data, id, year) {
-  let val = data.filter( d => d['country.code'] === id & d.Year == year);
+function getObjectProperty(data, id, field) {
+  let val = data.filter( d => d['country.code'] === id);
 
   if(val.length == 0) {console.log(id); return null;}
   else {
-    return val[0].Total;
+    return val[0][field];
   }
 }
