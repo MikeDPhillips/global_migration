@@ -73,12 +73,25 @@ left_join(all_codes, by=c("Code"="alpha.3")) %>%
 
 pop.long <- rbind(population, density, growth, npg, age_groups)
 
+pop.long %>% filter()
 pop.wide <- pop.long %>%
   pivot_wider(names_from=indicator, values_from=value)
 
+pop.wide$mig_rate <- pop.wide$growth_rate - pop.wide$natural_increase
+
+pop.wide %>%
+  filter(!is.na(mig_rate)) %>%
+  mutate(indicator="mig_rate") %>%
+  select(c(1:6, 17, value=16)) -> mig_rate
+
+pop.long <- rbind(pop.long, mig_rate)
+
+pop.long %>%
+  filter(alpha.3 %in% codes$code) ->test
+
 
 write_csv(pop.wide, "pop_data_wide.csv")
-write_csv(pop.long, "pop_data_long.csv")
+write_csv(test, "pop_data_long.csv")
 
 
 

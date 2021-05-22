@@ -13,7 +13,18 @@
     <script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
     <script>
 
-        var aitoff = d3.geoAitoff();
+        window.popData;
+        window.startYear = 2019;
+        d3.csv("data/pop_data_long.csv")
+        .then(all_data => {
+            all_data.forEach(d => {
+                d.value = Number(d.value);
+                d.year = Number(d.year);
+            })
+            window.popData = all_data;
+            fancy_createChart(all_data);
+        } )
+
 
     </script>
 
@@ -64,7 +75,8 @@
             <div class="chart-wrapper">
                 <div class="chart-title">Fancy Chart</div>
             <div class="chart-stage">
-                <p id="fancy-value-time"></p>
+                <div class="left"><p id="fancy-value-time"></p></div>
+                <div id="selected-name"></div>
                 <div id="fancy-chart"></div>
                 <div id="legendDiv"></div>
             </div>

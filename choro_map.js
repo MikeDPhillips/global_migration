@@ -5,6 +5,7 @@ const wmMapWidth = wmWidth - wmMargin.left -wmMargin.right
 const wmMapHeight = wmHeight - wmMargin.top - wmMargin.bottom
 
 
+console.log(window.popData);
 
 let wmSvg = d3.select("#world-chart").append("svg")
     .attr("id", "world")
@@ -173,8 +174,8 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
             .on('onchange', val => {
                 d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
                 d3.select('p#fancy-value-time').text(d3.timeFormat('%Y')(val))
-                let new_year = d3.select('p#value-time').text();
-                fancy_updateChart(new_year);
+                let new_year = d3.timeFormat('%Y')(sliderTime.value());
+                newYearUpdate(new_year);
             });
 
         let gTime = d3

@@ -7,6 +7,17 @@ path.outline {
 stroke:none;
 }
 
+.left {
+    float:left;
+}
+
+div#selected-name {
+    float: right;
+    color: #ccc;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+}
 #global-map {
     width:100%;
     max-width: 100%;
@@ -82,7 +93,6 @@ stroke:none;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight:500;
     font-size: 30px;
-
 }
 
 
