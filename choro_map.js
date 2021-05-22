@@ -86,9 +86,6 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
       }
 
         function mouseEntersPlot(event,d) {
-          console.log(this);
-          console.log(event)
-          console.log(d)
 
             d3.selectAll(".country")
                 .transition()
@@ -152,17 +149,14 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
             .range([0, w])
             .domain(wmPopExtent )
 
-
-        var xAxis = d3.axisBottom(x);
+       var xAxis = d3.axisBottom(x);
 
         key.append("g")
             .attr("class", "x_axis")
             .attr("transform", "translate(0,40)")
             .call(xAxis.tickFormat(d3.format(".0s")))
 
-
         //Time Slider
-
         let dataTime = d3.range(0, 20).map(function(d) {
             return new Date(2001 + d, 10, 3);
         });
@@ -180,7 +174,7 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
                 d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
                 d3.select('p#fancy-value-time').text(d3.timeFormat('%Y')(val))
                 let new_year = d3.select('p#value-time').text();
-             //   rerender(new_year);
+                fancy_updateChart(new_year);
             });
 
         let gTime = d3
@@ -194,7 +188,7 @@ Promise.all([d3.json("data/countries-110m-noant.json"),
 
         gTime.call(sliderTime);
         d3.select('p#value-time').text(d3.timeFormat('%Y')(sliderTime.value()));
-        d3.select('p#value-time').text(d3.timeFormat('%Y')(sliderTime.value()));
+        d3.select('p#fancy-value-time').text(d3.timeFormat('%Y')(sliderTime.value()));
 
 
 

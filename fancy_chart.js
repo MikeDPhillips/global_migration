@@ -21,7 +21,7 @@ let legends = d3.select("#legendDiv")
     .attr('transform', 'translate(0, 30)')
 
 Promise.all([d3.csv("data/pop_data_long.csv", d3.autoType())]
-).then( ([allPop]) => {
+).then( ([allPop])  => {
 
    allPop.forEach( d => {
         d.value = Number(d.value);
@@ -56,8 +56,9 @@ Promise.all([d3.csv("data/pop_data_long.csv", d3.autoType())]
 
   console.log(plotData);
 
+  window.allData = plotData;
 
-    let xExtent = d3.extent(plotData, d => d.xValue);
+   let xExtent = d3.extent(plotData, d => d.xValue);
     let xScale = d3.scaleLinear()
         .domain(xExtent).range([0, fancy_chart_Width]);
 
@@ -144,7 +145,7 @@ Promise.all([d3.csv("data/pop_data_long.csv", d3.autoType())]
         .attr('font-size', '11px')
         .text(d=>d.label);
 
-
+//tooltip
     let tooltip = fsvgContainer
         .append("div")
         .attr("class","tooltip")
@@ -162,45 +163,50 @@ Promise.all([d3.csv("data/pop_data_long.csv", d3.autoType())]
 
     tooltip;
 
-   // let fancy_colorScale = d3.scaleOrdinal().range(d3.schemeTableau10)
+    fancy_updateChart(newYear)
 
-    fancyChart.append('g')
-        .selectAll("dot")
-        .data(plotData)
-        .enter()
-        .append("circle")
-        .attr("country", d => d.country)
-        .attr("cx", d => {
-          return(xScale(d.xValue))
-        })
-        .attr("cy", d => yScale(d.yValue))
-        .attr("r", 7)
-        .style("fill", d=>fancy_colorScale(d.region))
-        .style("opacity", "0.5")
+    //circle
+    function fancy_updateChart(newYear){
+        fancyChart.append('g')
+            .selectAll("dot")
+            .data(plotData.filter(d => d.year === newYear))
+            .append("circle")
+            .transition()
+            .duration(1000)
+            .attr("country", d => d.country)
+            .attr("cx", d => {
+                return(xScale(d.xValue))
+            })
+            .attr("cy", d => yScale(d.yValue))
+            .attr("r", 7)
+            .style("fill", d=>fancy_colorScale(d.region))
+            .style("opacity", "0.5")
 
-        .on("mouseover", function(d) {
-            d3.select(this)
-                .transition()
-                .duration(100)
-                .attr("r",10)
-                .style("opacity", 1)
-            tooltip.style("visibility", "visible").text(d['country']);
+            .on("mouseover", function(d) {
+                d3.select(this)
+                    .transition()
+                    .duration(100)
+                    .attr("r",10)
+                    .style("opacity", 1)
+                tooltip.style("visibility", "visible").text(d['country']);
 
-        })
+            })
 
-        .on("mousemove", function(event,d){
-            let[x, y] = d3.pointer(event);
-            tooltip.style("top", (y)+"px")
-                .style("left",(x)+"px")
-                .text(d['country'])})
+            .on("mousemove", function(event,d){
+                let[x, y] = d3.pointer(event);
+                tooltip.style("top", (y)+"px")
+                    .style("left",(x)+"px")
+                    .text(d['country'])})
 
-        .on("mouseout", function(d) {
-                tooltip.style("visibility", "hidden");
-                d3.selectAll("circle")
-                    .attr("r",7)
-                    .style("opacity",0.5)
-            }
-        );
+            .on("mouseout", function(d) {
+                    tooltip.style("visibility", "hidden");
+                    d3.selectAll("circle")
+                        .attr("r",7)
+                        .style("opacity",0.5)
+                }
+            );
+
+    }
 
 
 
