@@ -3,7 +3,11 @@ path.country {
 }
 
 p#mig_description{
-    
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin:10px;
+    text-indent: 30px;
 }
 path.outline {
     fill:none;

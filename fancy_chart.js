@@ -97,7 +97,6 @@ function fancy_createChart(allPop) {
       .attr('font-size', '11px')
       .text(d => d.label);
 
-
   fancy_updateChart(window.startYear);
 }
 
