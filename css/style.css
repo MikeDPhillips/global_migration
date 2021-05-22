@@ -2,6 +2,9 @@ path.country {
     stroke: white;
 }
 
+p#mig_description{
+    
+}
 path.outline {
     fill:none;
 stroke:none;
