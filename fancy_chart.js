@@ -209,6 +209,7 @@ function fancy_createChart(allPop) {
                   .attr("realY", d => d.yValue)
                   .attr("realX", d => d.xValue)
                 .attr("country", d => d.country)
+                  .attr("class", d => d.region)
                 .attr("cx", d => {
                   return(xScale(d.xValue));
                 })
@@ -243,6 +244,8 @@ function fancy_createChart(allPop) {
               .attr("r",20)
               .style("opacity", 1)
               .style("stroke", 'black')
+          d3.selectAll(`circle.${d.region}`)
+              .style("opacity", 0.4)
           d3.select('#selected-name').text(d.country)
 
         })

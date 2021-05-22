@@ -24,7 +24,7 @@ def read_matrix(filename):
     with open(filename) as infile:  
         lines = infile.readlines()
 
-    origins =  [x.strip() for x in lines[0].split(',')[2:8]]
+    origins =  [x.strip() for x in lines[0].split(',')[1:7]]
     nodes = []
     for i in range(0, len(origins)):
         new_node = {}
@@ -42,7 +42,7 @@ def read_matrix(filename):
             new_edge ={}
             new_edge['source'] = orig.strip('"')
             new_edge['target'] = elements[0].strip('"')
-            new_edge['weight'] = elements[j+1]
+            new_edge['weight'] = elements[j+1].strip()
             print(new_edge)
             edges.append(new_edge)
     
