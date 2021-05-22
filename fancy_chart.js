@@ -3,7 +3,9 @@ const fancyHeight = 600
 const fancyMargin = { top:10, right:10, bottom:10, left:10}
 const fancy_chart_Width = fancyWidth - fancyMargin.left -fancyMargin.right
 const fancy_chart_Height = fancyHeight - fancyMargin.top - fancyMargin.bottom
-let fancy_colorScale;
+let fancy_colorScale = d3.scaleOrdinal()
+    .domain(['Africa','Asia','Europe','Latin America','North America','Oceania'])
+    .range(['#4e79a7','#f28e2c','#e15759','#76b7b2','#59a14f','#edc949'])
 
 let fsvgContainer = d3.select('#fancy-chart');
 let fancySvg = fsvgContainer.append("svg")
@@ -27,23 +29,21 @@ yAxisG = fancyChart.append("g")
     .attr("class", "yAxis")
     //.attr("transform","translate("+fancyMargin.left+","+(fancyMargin.top)+")")
     //.attr("transform","translate(50,"+(fancyMargin.top-10)+")") //30
-    .attr("transform", "translate(90,10)")
+    .attr("transform", "translate(87,0)")
 
 xAxisG = fancyChart.append("g")
     .attr("class", "xAxis")
     .attr("transform", "translate(" + fancyMargin.left + "," + (fancy_chart_Height + fancyMargin.top) + ")")
-    .attr("transform", "translate(10,341)")
+    .attr("transform", "translate(0,290)")
 
 
 function fancy_createChart(allPop) {
-
-
 
   fancyChart.append("text")
       .attr("class", "fancyLabel")
       .attr("text-anchor", "end")
       .attr("x", 580)
-      .attr("y", 380)
+      .attr("y", 340)
       .text("Natural Increase Rate");
 
   //add y-axis label
@@ -74,9 +74,7 @@ function fancy_createChart(allPop) {
     {index: 5, label: 'Oceania'},
   ];
 
-
-  fancy_colorScale = d3.scaleOrdinal().domain(legendName)
-      .range(['#edc949', '#4e79a7', '#f28e2c', '#e15759', '#76b7b2', '#59a14f'])
+  console.log(legendName)
 
   let entries = legends
       .selectAll('g')
@@ -84,9 +82,9 @@ function fancy_createChart(allPop) {
       .join('g')
       .attr('transform', d => `translate(${20 + d.index * 100},20)`);
 
-  let symbols = entries.append('circle')
-      .attr('cx', 5) // <-- offset symbol x-position by radius
-      .attr('r', 10)
+  let symbols = entries.append('rect')
+      .attr('width', 8)
+      .attr('height', 8)
       .attr('opacity', 1)
       .style('fill', d => fancy_colorScale(d.label));
 
@@ -144,15 +142,15 @@ function fancy_createChart(allPop) {
 
     console.log("x")
     console.log(xExtent)
-    xExtent[0] = Math.floor(xExtent[0])
-    xExtent[1] = Math.ceil(xExtent[1])
+    //xExtent[0] = Math.floor(xExtent[0])
+    //xExtent[1] = Math.ceil(xExtent[1])
 
     console.log(xExtent)
 
     let yExtent = d3.extent(plotData, d => d.yValue);
     console.log(yExtent)
-    yExtent[0] = Math.floor(yExtent[0])
-    yExtent[1] = Math.ceil(yExtent[1])
+    //yExtent[0] = Math.floor(yExtent[0])
+    //yExtent[1] = Math.ceil(yExtent[1])
     let yScale = d3.scaleLinear().domain(yExtent).range([fancy_chart_Height, 0]);
 
     console.log(yExtent)
@@ -179,7 +177,7 @@ function fancy_createChart(allPop) {
 
                 .attr("r", 7)
                 .style("fill", d => fancy_colorScale(d.region))
-                .style("opacity", 0.75)},
+                .style("opacity", 0.2)},
             update => {
               update.transition()
                   .duration(100)
@@ -213,6 +211,7 @@ function fancy_createChart(allPop) {
         .on("mouseout", function(d) {
           d3.selectAll("circle")
               .attr("r",7)
+              .style("stroke",null)
               .style("opacity", 0.75)
         });
 }
