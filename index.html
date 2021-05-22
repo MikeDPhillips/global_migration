@@ -14,15 +14,20 @@
     <script>
 
         window.startYear = 2019;
-        d3.csv("data/pop_data_long.csv")
-        .then(all_data => {
+        Promise.all([d3.json("data/countries-110m-noant.json"),
+        d3.csv("data/pop_data_long.csv")])
+        .then(([geoMap, all_data ])=> {
             all_data.forEach(d => {
                 d.value = Number(d.value);
                 d.year = Number(d.year);
             })
+
+            window.mapData = geoMap;
             window.popData = all_data;
+            console.log("got all the data loaded");
             fancy_createChart(all_data);
             createLineChart(all_data);
+            createMap(geoMap, all_data);
         } )
 
 
@@ -43,31 +48,40 @@
     <!--first row-->
     <!-- Columns are always 50% wide, on mobile and desktop -->
     <div class="row">
-        <div class="col-8" id="global-map">
+        <div class="col-6" id="global-map">
             <div class="chart-wrapper">
                 <div class="chart-title">
                 World Map
                     </div>
-            <div class="chart-stage">
-                <div id="world-chart"><p id="value-time"></p></div>
-              </div>
+            <div class="chart-stage" id="world-chart">
+
+
+                        <div id="slider-value"><p id="value-time"></p></div>
+                    <svg id="world"></svg>
+                        <div id="slider-time"><svg class="slider"></svg></div>
               </div>
               </div>
 
-          <div class="col-4">
+
+        </div>
+
+
+          <div class="col-6">
               <div class="chart-wrapper">
                   <div class="chart-title">
-                      Selected Country
+                      Age Structure Detail for Selected Country
                   </div>
+
               <div class="chart-stage">
                   <p id="country-name"></p>
                   <div id="country-chart"></div>
                   <div id="linelegendDiv"></div>
               </div>
           </div>
-      </div>
+
       </div>
 
+      </div>
       <!--second row-->
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <div class="row">

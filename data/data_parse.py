@@ -15,8 +15,8 @@ def save_json(li, filename = "lotr.json"):
         
         
 
-filename = "region20_matrix.csv"
-outfilename = "region20.json"
+filename = "region20_upper_matrix.csv"
+outfilename = "region20_upper.json"
 
 indexes = [ 903, 935, 908, 904, 905, 909]
 
@@ -24,7 +24,7 @@ def read_matrix(filename):
     with open(filename) as infile:  
         lines = infile.readlines()
 
-    origins =  lines[0].split(',')[1:7]
+    origins =  [x.strip() for x in lines[0].split(',')[2:8]]
     nodes = []
     for i in range(0, len(origins)):
         new_node = {}
@@ -50,4 +50,4 @@ def read_matrix(filename):
     results['nodes'] = nodes
     results['edges'] = edges
     
-save_json(results, "migration2020.json")
+save_json(results, "migration2020_upper2.json")

@@ -1,7 +1,7 @@
-const lineWidth = 400
-const lineHeight = 400
-const lineMargin = { top:10, bottom:10, left:10,right:10}
-const line_chart_Width = lineWidth - lineMargin.left
+const lineWidth = 700
+const lineHeight = 600
+const lineMargin = { top:10, bottom:25, left:50,right:50}
+const line_chart_Width = lineWidth - lineMargin.left - lineMargin.right;
 const line_chart_Height = lineHeight - lineMargin.top - lineMargin.bottom
 
 let lineSvgContainer = d3.select('#country-chart');
@@ -11,47 +11,62 @@ let lineSvg = lineSvgContainer.append("svg")
     .attr("height", lineHeight)
 
 
+let annotations = lineSvg.append("g").attr("id","annotations");
+
 let lineChart = lineSvg.append("g").attr("transform", `translate(${lineMargin.left}, ${lineMargin.top})`)
 
 let linelegends = d3.select("#linelegendDiv")
     .append("svg")
-    .attr('width', 400)
+    .attr('width', lineWidth)
     .attr('height',100)
     .append('g')
-    .attr('transform', 'translate(0, 30)')
+    .attr('transform', 'translate(50, 0)')
 
 
-d3.csv("data/pop_data_long.csv",d3.autoType).then((data)=>{
-    console.log(data)
+line_xAxis = d3.axisBottom()
 
-    data.forEach( d => {
-        d.value = Number(d.value);
-        d.year = Number(d.year);
-    })
+line_xAxisG = annotations.append("g")
+    .attr("class", "line_xAxis")
+    .attr("transform",`translate(${lineMargin.left},${line_chart_Height+lineMargin.top})`)
 
-    console.log(data)
+
+line_yAxis = d3.axisLeft()
+
+
+line_yAxisG = annotations.append("g")
+    .attr("class", "line_yAxis")
+    .attr("transform",`translate(${lineMargin.left},${lineMargin.top})`)
+
+
+
+
+
+
+
+function createLineChart(data) {
+    updateLineChart(data, "United States");
+
+}
+
+function updateLineChart(data, new_country) {
 
     let age5 = "age5_14"
     let age15 = "age15_24"
     let age25 = "age25_64"
     let age65 = "age65"
-    let country = "Afghanistan"
+    let country = new_country;
     let line_colorScale = ["#E3F4DE","#8FD4BD","#42A6CC","#084081"]
 
     d3.select('p#country-name').text(country)
 
-    let filtered5= data.filter(function(d){return d.indicator == age5 }).filter(d => d.country==country)
+    console.log("Performing update for " + country);
+    let filtered5= data.filter(function(d){return d.indicator === age5 }).filter(d => d.country===country)
 
-    let filtered15= data.filter(function(d){return d.indicator == age15 }).filter(d => d.country==country)
+    let filtered15= data.filter(function(d){return d.indicator === age15 }).filter(d => d.country===country)
 
-    let filtered25= data.filter(function(d){return d.indicator == age25 }).filter(d => d.country==country)
+    let filtered25= data.filter(function(d){return d.indicator === age25 }).filter(d => d.country===country)
 
-    let filtered65= data.filter(function(d){return d.indicator == age65 }).filter(d => d.country==country)
-
-    console.log(filtered5)
-    console.log(filtered15)
-    console.log(filtered25)
-    console.log(filtered65)
+    let filtered65= data.filter(function(d){return d.indicator === age65 }).filter(d => d.country===country)
 
     let newData = []
 
@@ -66,9 +81,6 @@ d3.csv("data/pop_data_long.csv",d3.autoType).then((data)=>{
             region : filtered5[i].region
         });
     }
-
-    console.log(newData);
-
 
     // create stack
     let mygroups = ["age5Value", "age15Value", "age25Value","age65Value"] // list of group names
@@ -88,35 +100,26 @@ d3.csv("data/pop_data_long.csv",d3.autoType).then((data)=>{
         stackedData.push(currentStack)
     });
 
-    console.log(stackedData)
-    console.log(stackedValues)
-
     //set up x and y scale
     let yScale = d3
         .scaleLinear()
         .range([line_chart_Height, 0])
         .domain([0, d3.max(stackedValues[stackedValues.length - 1], dp => dp[1])]);
 
+    line_yAxis.scale(yScale).ticks().tickFormat(d3.format(".3s"))
+    line_yAxisG.call(line_yAxis);
+
     let a = d3.max(stackedValues[stackedValues.length - 1], dp => dp[1])
-    console.log(a)
 
     let xScale = d3
         .scaleLinear()
         .range([0, line_chart_Width])
         .domain(d3.extent(newData, dataPoint => dataPoint.year));
 
+
     // Add the X Axis
-    lineChart
-        .append("g").attr("transform",'translate(20,370)')
-        //.attr("transform", `translate(0,${line_chart_Height})`)
-        .call(d3.axisBottom(xScale).ticks(5));
-
-    // Add the Y Axis
-    lineChart
-        .append("g")
-        .attr("transform", `translate(20, -10)`)
-        .call(d3.axisLeft(yScale).tickFormat(d3.format(".0s")));
-
+    line_xAxis.scale(xScale).ticks().tickFormat(d3.format("d"));
+    line_xAxisG.call(line_xAxis)
 
 
     let area = d3
@@ -125,28 +128,36 @@ d3.csv("data/pop_data_long.csv",d3.autoType).then((data)=>{
         .y0(dataPoint => yScale(dataPoint.values[0]))
         .y1(dataPoint => yScale(dataPoint.values[1]));
 
+    d3.selectAll(".series")
+        .remove()
+
     let series = lineChart
         .selectAll(".series")
         .data(stackedData)
-        .enter()
-        .append("g")
-        .attr("class", "series");
+        .join(
+        enter => {
+            enter.append("g")
+                .attr("class", "series")
+           .append("path")
+                .style("fill", (d, i) => line_colorScale[i])
+                .style("opacity", 0.75)
+                .attr("d", d => area(d))
+        },
+        update => {
+            update.transition()
+                .duration(100)
+                .style("fill", (d, i) => line_colorScale[i])
+                .style("opacity", 0.75)
+                .attr("d", d => area(d))
+        },
+            exit => {exit.remove()}
+);//end join
 
-    series
-        .append("path")
-        .attr("transform", `translate(20,-10)`)
-        .style("fill", (d, i) => line_colorScale[i])
-        .style("opacity",0.75)
-        //.attr("stroke", "steelblue")
-        //.attr("stroke-linejoin", "round")
-        //.attr("stroke-linecap", "round")
-        //.attr("stroke-width", 1.5)
-        .attr("d", d => area(d));
 
     //Add legends
     let line_legend_title = linelegends.append('text')
-        .attr('x', 0)
-        .attr('y', 0)
+        .attr('x', 20)
+        .attr('y', 20)
         .attr('fill', 'black')
         .attr('font-family', 'Helvetica Neue, Arial')
         .attr('font-weight', 'bold')
@@ -167,7 +178,7 @@ d3.csv("data/pop_data_long.csv",d3.autoType).then((data)=>{
         .selectAll('g')
         .data(line_legendName)
         .join('g')
-        .attr('transform', d => `translate(${20 + d.index * 80},20)`);
+        .attr('transform', d => `translate(${20 + d.index * 80},50)`);
 
     let line_symbols = line_entries.append('circle')
         .attr('cx',5) // <-- offset symbol x-position by radius
@@ -182,6 +193,9 @@ d3.csv("data/pop_data_long.csv",d3.autoType).then((data)=>{
         .attr('font-family', 'Helvetica Neue, Arial')
         .attr('font-size', '11px')
         .text(d=>d.label);
+}
 
-})
 
+function newCountryUpdate(country) {
+    updateLineChart(window.popData, country);
+}
