@@ -216,7 +216,7 @@ function fancy_createChart(allPop) {
 
                 .attr("r", 7)
                 .style("fill", d => fancy_colorScale(d.region))
-                .style("opacity", 0.4)},
+                .style("opacity", 0.75)},
             update => {
               update.transition()
                   .duration(100)
@@ -245,7 +245,7 @@ function fancy_createChart(allPop) {
               .style("opacity", 1)
               .style("stroke", 'black')
           d3.selectAll(`circle.${d.region}`)
-              .style("opacity", 0.4)
+              .style("opacity", 0.7)
           d3.select('#selected-name').text(d.country)
 
         })
